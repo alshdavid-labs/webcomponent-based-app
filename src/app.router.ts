@@ -1,15 +1,26 @@
-// import Navigo from 'navigo'
+import Navigo from 'navigo'
 
-// const routerOutlet = document.getElementById('router-outlet')
-// const router = new Navigo()
+export interface Route {
+    path: string,
+    componentName: string
+}
 
-// console.log(Navigo)
-console.log('from router 2 ')
+export const bootstrapRouter = (router: Navigo, routes: Route[] ) => {
+    const routerOutlet = document.getElementById('router-outlet')
+    const navigate = (componentName: string) => (params: Record<string, string>, query: string) => {
+        if (routerOutlet === null) {
+            return
+        }
+        const incomingPage = document.createElement(componentName)
+        routerOutlet.innerHTML = ''
+        routerOutlet.appendChild(incomingPage)
+    }
+    
+    const routingObeject: any = {}
 
-// const navigate = (componentName: string) => ((params: Navigo.Params, query: string)) => {
+    for (const route of routes) {
+        routingObeject[route.path] = navigate(route.componentName)
+    }
 
-// }
-
-// router.on({
-//     '/': () => {}
-// })
+    router.on(routingObeject).resolve()
+}
