@@ -1,12 +1,9 @@
 const path = require('path');
-const DashboardPlugin = require("webpack-dashboard/plugin");
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 module.exports = {
-    entry: path.join(__dirname, '/src/index.ts'),
-    mode: 'development',
-    plugins: [
-        new DashboardPlugin()
-    ],
+    entry: path.join(__dirname, '/src/app.ts'),
+    // mode: 'development',
     watchOptions: {
         aggregateTimeout: 300,
         poll: 1000
@@ -25,6 +22,9 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js"]
+        extensions: [".tsx", ".ts", ".js"],
+        plugins: [
+            new TsconfigPathsPlugin()
+        ]
     },
 };

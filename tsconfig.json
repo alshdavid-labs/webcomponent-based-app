@@ -1,11 +1,31 @@
 {
   "compilerOptions": {
     "target": "es6", 
-    "module": "commonjs",  
+    "module": "esnext",  
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "lib": [
+      "dom",
+      "es2017"
+    ],
     "sourceMap": true,
     "strict": true,
     "esModuleInterop": true,
-    "allowJs": true
+    "allowJs": true,
+    "jsx": "react",
+    "jsxFactory": "createElement",
+    "paths": {
+      "~platform": ["src/platform"],
+      "~platform/*": ["src/platform/*"],
+      "~components": ["src/components"],
+      "~components/*": ["src/components/*"],
+      "~services": ["src/services"],
+      "~services/*": ["src/services/*"],
+      "~views": ["src/views"],
+      "~views/*": ["src/views/*"],
+      "~": ["src"],
+      "~/*": ["src/*"],
+    }
   },
   "exclude": [
     "node_modules"
