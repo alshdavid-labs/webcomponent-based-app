@@ -1,1 +1,2 @@
-export * from './home.view'
+export * from './home/home'
+export * from './add/add'

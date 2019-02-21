@@ -13,6 +13,7 @@
     "esModuleInterop": true,
     "allowJs": true,
     "jsx": "react",
+    "experimentalDecorators": true,
     "paths": {
       "~platform": ["src/platform"],
       "~platform/*": ["src/platform/*"],

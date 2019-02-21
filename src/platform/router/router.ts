@@ -34,7 +34,7 @@ export class Router {
             if (!this.routerOutlet) {
                 throw new Error('No outlet found')
             }
-            this.routerOutlet.innerHTML = ''
+            ReactDOM.unmountComponentAtNode(this.routerOutlet)
             ReactDOM.render(React.createElement(component), this.routerOutlet)
         }
     }

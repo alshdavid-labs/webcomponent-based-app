@@ -1,18 +1,21 @@
-import { Router } from '~/platform'
-import { TodoItem } from '~services';
+import { Router, Todo } from '~/platform';
 import * as VIEWS from '~/views'
-import * as SERVICES from '~/services'
+declare const window:any
 
-const todoItemsService = new SERVICES.TodoItemsService()
+const todoService = new Todo.Service()
 
 const router = new Router()
 const routes = [
-    { path: '/', component: VIEWS.homeViewComponent(router, todoItemsService) }
+    { path: '/', component: VIEWS.homeViewComponent(router, todoService) },
+    { path: '/add', component: VIEWS.addViewComponent(router, todoService) }
 ]
 router.init(routes)
 
 console.log('App is ready to go')
 
-todoItemsService.save('item_1', new TodoItem('one', 'date'))
-todoItemsService.save('item_2', new TodoItem('two', 'date'))
-todoItemsService.save('item_3', new TodoItem('three', 'date'))
+todoService.save('item_1', new Todo.Item('one', 'date'))
+todoService.save('item_2', new Todo.Item('two', 'date'))
+todoService.save('item_3', new Todo.Item('three', 'date'))
+
+window.todoService = todoService
+window.todoItem = Todo.Item
