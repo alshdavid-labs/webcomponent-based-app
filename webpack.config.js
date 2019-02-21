@@ -3,7 +3,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 module.exports = {
     entry: path.join(__dirname, '/src/app.ts'),
-    // mode: 'development',
+    mode: 'development',
     watchOptions: {
         aggregateTimeout: 300,
         poll: 1000

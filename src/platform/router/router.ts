@@ -1,8 +1,9 @@
 import Navigo from 'navigo'
-
+import ReactDOM from 'react-dom'
+import React from 'react'
 export interface Route {
     path: string,
-    componentName: string
+    component: any
 }
 
 export class Router {
@@ -10,34 +11,31 @@ export class Router {
     private currentRoute: HTMLElement | null = null
 
     constructor(
-        public routes: Route[],
         private routerOutlet = document.getElementById('router-outlet')
     ) {
         if (!this.routerOutlet) {
             throw new Error('No outlet found')
         }
         this.engine = new Navigo()
+    }
 
+    init(routes: Route[]) {
         const routingObeject: any = {}
 
         for (const route of routes) {
-            routingObeject[route.path] = this.setRoute(route.componentName)
+            routingObeject[route.path] = this.setRoute(route.component)
         }
 
         this.engine.on(routingObeject).resolve()
     }
 
-    private setRoute(componentName: string) {
+    private setRoute(component: any) {
         return (params: Record<string, string>, query: string) => {
             if (!this.routerOutlet) {
                 throw new Error('No outlet found')
             }
-            const incomingPage = document.createElement(componentName)
-            if (this.currentRoute) {
-                this.routerOutlet.removeChild(this.currentRoute)
-            }
-            this.currentRoute = incomingPage
-            this.routerOutlet.appendChild(incomingPage)
+            this.routerOutlet.innerHTML = ''
+            ReactDOM.render(React.createElement(component), this.routerOutlet)
         }
     }
 

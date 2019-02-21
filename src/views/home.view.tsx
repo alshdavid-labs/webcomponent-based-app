@@ -1,54 +1,26 @@
-import { createElement } from 'inferno-create-element';
-import { Router, Component } from '~/platform';
-import { TodoItemsService, TodoItem } from '~/services';
-import { cloneDeep } from 'lodash';
+import React, { Component } from 'react';
+import { Router } from '~/platform';
+import { TodoItemsService } from '~/services';
+import * as Components from '~/components';
 
 export const homeViewComponent = (
     router: Router,
     todoItemsService: TodoItemsService
-) => {
-    const selector = 'app-view-home'
+) => class HomeViewComponent extends Component {
 
-    class HomeViewComponent extends Component {
-        state: any = {
-            todoItems: {}
-        }
-
-        connectedCallback() {
-            todoItemsService.store
-                .subscribe(
-                    v => this.state = { ...cloneDeep(this.state), todoItems: v })
-        }
-
-        private onClickItem = (index: string, item: TodoItem) => {
-            todoItemsService.save(index, new TodoItem(
-                item.item, item.date, !item.completed))
-        }
-
-        constructTodoList() {
-            const items  = []
-            for (const index in this.state.todoItems) {
-                const item = this.state.todoItems[index]
-
-                items.push(<app-todo-item 
-                    item={item.item} 
-                    date={item.date} 
-                    completed={item.completed} 
-                    onclick={() => this.onClickItem(index, item)} />)
-            }
-
-            return items
-        }
-
-        render() {
-            return <div>
-                <app-navbar>Bucket List</app-navbar>
-                { this.constructTodoList() }
-            </div>
-        }
+    componentDidMount() {
+        console.log(router, todoItemsService)
     }
 
-    customElements.define(selector, HomeViewComponent)
+    render() {
+        return <div className="home-view-component">
+            <div onClick={() => router.navigate('/add')}>Go</div>
+            <Components.TodoItem  
+                name="hei"
+                date="yo"
+                completed={true} />
+        </div>
+    } 
 
 }
 

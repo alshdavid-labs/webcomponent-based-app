@@ -13,7 +13,6 @@
     "esModuleInterop": true,
     "allowJs": true,
     "jsx": "react",
-    "jsxFactory": "createElement",
     "paths": {
       "~platform": ["src/platform"],
       "~platform/*": ["src/platform/*"],
