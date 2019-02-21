@@ -46,8 +46,3 @@ export const homeViewComponent = (
     }
     return HomeViewComponent
 }
-
-/**
-
-      // <div onClick={() => router.navigate('/add')}>Go</div>
- */
